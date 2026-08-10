@@ -1,0 +1,400 @@
+\documentclass[11pt]{amsart}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage[margin=1.25in]{geometry}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{remark}
+\newtheorem*{remarks}{Remarks}
+
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\PP}{P}
+
+\title[Dickson's conjecture and sum-sets within the primes]
+      {Dickson's conjecture and infinite multidimensional\\ sum-sets within the primes}
+\author{David Feldman}
+\address{Department of Mathematics and Statistics, University of New
+Hampshire, Durham, NH 03824, USA}
+\author{Russell Impagliazzo}
+\address{Department of Computer Science and Engineering, University of
+California San Diego, La Jolla, CA 92093, USA}
+\subjclass[2020]{11P32 (11N32, 68V20)}
+
+\begin{document}
+
+\begin{abstract}
+Assuming Dickson's conjecture, we show that for every prime $p$ and
+every $n\le p-2$ the set $\PP$ of primes contains a sum-set
+$\{p\}+E_0+\cdots+E_n$ with each $E_i$ an infinite set of even numbers
+containing $0$.  Unconditionally, no such configuration exists once
+$n\ge p-1$, so the result is sharp.  In particular the primes contain
+no infinite-dimensional sum-set, although random models capturing the
+density behavior of the primes do; in this respect the primes fail to
+behave like a typical prime-like random set.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}
+
+We shall show that Dickson's conjecture concerning the set $\PP$ of
+prime numbers implies that $\PP$ contains certain strikingly highly
+structured subsets.  Precise statements follow once we establish
+terminology and notation.  Throughout, $\NN$ denotes the natural
+numbers including $0$, and $2\NN$ the even natural numbers.
+
+Given a family $\{A_i\}$ of subsets of $\NN$, write $\bigoplus A_i$
+for the subset of $\prod A_i$ consisting of vectors with all but
+finitely many coordinates equal to $0$.  (For infinite families
+$\{A_i\}$ we always assume all but finitely many sets contain $0$.)
+The \emph{sum-set} of $\{A_i\}$, written $\sum A_i$ or
+$A_0+A_1+\cdots$, means the set
+$\bigl\{\sum_i x_i \mid (x_i)\in\bigoplus A_i\bigr\}$.
+
+The language of sum-sets helps express notions of additive number
+theory.  For example, the famous Twin Prime Conjecture predicts an
+infinite subset $T\subset\PP$ such that $T+\{0,2\}\subset\PP$.  A long
+record of intractability has not prevented the Twin Prime Conjecture
+from spawning many (of course conjectural) generalizations, perhaps
+most famously Schinzel's Hypothesis H \cite{SchSie}.  Here we develop
+a formal consequence of an older generalization of intermediate
+ambition, namely Dickson's conjecture \cite{Dickson}.  Dickson's
+conjecture concerns finite families $\{a_i m+b_i\}$ of linear
+polynomials in $m$ with $a_i\ge 1$ and $b_i\in\NN$,
+having the property that no one prime divides $\prod_i(a_i n+b_i)$
+for every $n\in\NN$; the conjecture predicts infinitely many values of
+$m$ making all the quantities $a_i m+b_i$ simultaneously prime.
+
+Now we can state our results.
+
+\begin{theorem}\label{thm:main}
+Assume Dickson's conjecture.  Then for every prime $p$ and every
+integer $n$ with $1\le n\le p-2$ there exist infinite sets
+$E_0,\dots,E_n\subset 2\NN$, each containing $0$, such that
+\[
+\{p\}+\sum_{i=0}^{n}E_i \;\subset\; \PP .
+\]
+\end{theorem}
+
+The restriction $n\le p-2$ cannot be relaxed, and in particular no
+infinite-dimensional analogue can hold:
+
+\begin{proposition}\label{prop:sharp}
+Let $p$ be prime and let $E_0,\dots,E_{p-1}\subset\NN$ each contain
+$0$ and at least one positive element.  Then
+$\{p\}+\sum_{i=0}^{p-1}E_i \not\subset \PP$.  Consequently, for no
+prime $p$ and no family $\{E_i\}_{i\in I}$ with $|I|\ge p$ (in
+particular, no infinite family) of sets each containing $0$ and a
+positive element can one have $\{p\}+\sum_{i\in I}E_i\subset\PP$.
+\end{proposition}
+
+Together the two statements give a sharp dichotomy: under Dickson's
+conjecture, a sum-set of the form $\{p\}+E_0+\cdots+E_n$ (with
+$0\in E_i$, $E_i$ infinite) lies within the primes exactly when
+$n\le p-2$.
+
+We place these statements in context.  The existence assertion of
+Theorem~\ref{thm:main}, viewed simply as an $(n+1)$-fold conditional
+sum-set within the primes, is not new: Granville \cite{Granville}
+showed already in 1990, under the Dickson--Hardy--Littlewood
+conjecture, that the primes contain $k$-fold sum-sets
+$A_1+\cdots+A_k$ of infinite sets for every $k$.  Indeed the
+unanchored form of Theorem~\ref{thm:main} falls out of Granville's
+theorem in a few lines: with $A_0+\cdots+A_n\subseteq\PP$ as
+\cite{Granville} provides, choose $a_i\in A_i$ and put
+$p' := a_0+\cdots+a_n$, itself a full sum and hence prime; the
+translates $E_i := \{\,b-a_i : b\in A_i,\ b\ge a_i,\ b\equiv a_i
+\pmod 2\,\}$ are infinite, consist of even numbers, contain $0$, and
+satisfy $\{p'\}+E_0+\cdots+E_n \subseteq A_0+\cdots+A_n
+\subseteq\PP$.  What this derivation cannot control is the anchor:
+$p'$ falls where it falls.  What we
+believe is new here is therefore the anchored, quantitative form of the
+question and its answer: the exact trade-off between the anchor prime
+$p$ and the achievable dimension, with the threshold $n=p-2$ sharp in
+both directions.  Tao and Ziegler \cite{TaoZiegler} proved
+unconditionally that there exist infinite sets $A,B$ with $a+b$ prime
+whenever $a\in A$, $b\in B$ and $a<b$; whether the full sum-set $A+B$
+of two infinite sets lies in the primes remains open unconditionally.
+Kra, Moreira, Richter and Robertson \cite{KMRRsurvey} prove,
+conditionally on Dickson--Hardy--Littlewood, the stronger single-set
+statement that $\PP-1$ contains all sums of at most $k$ distinct
+elements of a single infinite set, for each fixed $k$; they also show
+unconditionally that no shift of $\PP$ contains an IP-set, a statement
+in the spirit of Proposition~\ref{prop:sharp}.  We
+return in the closing remarks to a second point of interest, the
+contrast with random models of the primes.
+
+\section{Proof of Proposition~\ref{prop:sharp}}
+
+Choose a positive element $x_i\in E_i$ for $i=0,\dots,p-1$ and form
+the prefix sums $\sigma_k := x_0+\cdots+x_{k-1}$ for $k=0,\dots,p$
+(so $\sigma_0=0$).  The $p+1$ values $\sigma_k \bmod p$ cannot all be
+distinct, so $\sigma_a\equiv\sigma_b \pmod p$ for some $a<b$, whence
+\[
+x_a + x_{a+1} + \cdots + x_{b-1} \equiv 0 \pmod p .
+\]
+Taking the coordinates $a,\dots,b-1$ equal to these $x_i$ and all
+other coordinates equal to $0$ produces an element of
+$\{p\}+\sum_i E_i$ congruent to $0$ modulo $p$ and strictly larger
+than $p$; that element is composite.  The final assertion follows by
+restricting attention to any $p$ of the sets.  \qed
+
+\begin{remarks}
+The pigeonhole step is the statement that the Davenport constant of
+$\mathbb{Z}/p\mathbb{Z}$ equals $p$; the bound is attained (take every
+$x_i\equiv 1 \bmod p$ with only $p-1$ sets), which is why the
+threshold sits at $p-1$ sets rather than $p$.  Note that the
+proposition is unconditional and requires neither infinitude nor
+evenness of the $E_i$.
+\end{remarks}
+
+\section{Proof of Theorem~\ref{thm:main}}
+
+Fix $n\ge 1$ and a prime $p>n+1$.  We must produce $n+1$ infinite sets
+$E_i\subset 2\NN$ of even numbers, each containing $0$.
+
+We notate the elements of $E_i$ from small to large as $e_{i,j}$,
+$j=0,1,\dots$, starting with $e_{i,0}=0$ for all $i$, and we determine
+the further elements inductively in the order
+\[
+e_{0,1},\,e_{1,1},\,\dots,\,e_{n,1},\,e_{0,2},\,\dots,\,e_{n,2},\,
+e_{0,3},\,\dots
+\]
+Write $E_{i,j}:=\{e_{i,0},\dots,e_{i,j}\}$ for the provisional
+$(j+1)$-term initial segment of $E_i$.  At every stage the
+\emph{current sum-set} $S$ means $\{p\}+\sum_i E_{i,j_i}$ formed from
+the current initial segments; the construction will maintain
+$S\subset\PP$ throughout, and $E_i:=\bigcup_j E_{i,j}$ then completes
+the proof.
+
+Roughly, the strategy for determining each $e_{i,j}$ comes down to
+applying Dickson's conjecture to translate the set
+\[
+C^\ast \;:=\; \{p\}+\sum_{i'<i}E_{i',j}+\sum_{i'>i}E_{i',j-1}
+\]
+into $\PP$ by some even number, which we then declare to be $e_{i,j}$:
+the sums newly created by the insertion are exactly
+$\{e_{i,j}\}+C^\ast$, since a sum using an older element of coordinate
+$i$ was already present.  The point requiring care is that we must
+also avoid spoiling the hypothesis of Dickson's conjecture at every
+\emph{later} stage of the construction.  We now set up the
+bookkeeping that accomplishes this.
+
+\subsection*{Critical values and the residues $s_q$}
+
+Call an element of the current sum-set $S$ a \emph{critical value} if
+it admits a representation $p+\sum_{i\in T}x_i$ with
+$T\subsetneq\{0,\dots,n\}$ and $x_i\in E_{i,j_i}\setminus\{0\}$ ---
+that is, a representation with at least one coordinate equal to $0$.
+(If one visualizes the growing sum-set as a box with $p$ at the
+origin, the critical values sit on the bounding hyperplanes through
+the origin.)  Critical values are primes, being elements of $S$; we
+call them \emph{critical primes}.  Once critical, always critical.
+The prime $p$ itself (the empty sum) is critical from the outset.
+Observe that the set $C^\ast$ above consists entirely of critical
+values: its representations omit coordinate $i$.
+
+When a prime $q$ first occurs as a critical value --- its
+\emph{birth} --- let $C_q$ denote the set of critical values present
+at that moment (including $q$ itself) and put $N_q:=|C_q|$.  Provided
+\begin{equation}\label{eq:room}
+q \;>\; (n+1)\,N_q ,
+\end{equation}
+we may choose a residue $s_q\in\{1,\dots,q-1\}$ such that
+\begin{equation}\label{eq:sq}
+(k+1)\,s_q \;\not\equiv\; -c \pmod q
+\qquad\text{for all } 0\le k\le n \text{ and all } c\in C_q :
+\end{equation}
+each pair $(k,c)$ forbids exactly one residue, since
+$k+1\le n+1<p\le q$ is invertible modulo $q$, and there are at most
+$(n+1)N_q<q$ such pairs.  (Taking $k=0$ and $c=q$ shows
+\eqref{eq:sq} forces $s_q\not\equiv 0$, so the choice
+$s_q\in\{1,\dots,q-1\}$ involves no further constraint.)  We treat $p$
+as born at the start, with $C_p=\{p\}$ and $N_p=1$; here the forbidden
+set is exactly $\{0\}$, so \emph{any} nonzero residue $s_p$ works ---
+this is precisely where the hypothesis $p>n+1$ enters.
+
+\emph{Rule for critical primes:} every element $e_{i,j}$ inserted
+after the birth of $q$ satisfies $e_{i,j}\equiv s_q \pmod q$.
+
+The utility of \eqref{eq:sq} rests on the following confinement
+lemma, which controls all critical values forever after.
+
+\begin{lemma}\label{lem:confine}
+Let $q$ be a critical prime.  Every critical value $c'$ arising at any
+time satisfies
+\[
+c' \;\equiv\; c + k\,s_q \pmod q
+\qquad\text{for some } c\in C_q \text{ and some } 0\le k\le n .
+\]
+\end{lemma}
+
+\begin{proof}
+Write $c'=p+\sum_{i\in T}x_i$ with $T\subsetneq\{0,\dots,n\}$ and each
+$x_i$ positive, and let $k$ be the number of $i\in T$ whose element
+$x_i$ was inserted after the birth of $q$.  Each such $x_i$ is
+$\equiv s_q\pmod q$ by the rule above, and $k\le|T|\le n$.  Deleting
+those coordinates leaves the value $p+\sum x_i$ over the remaining
+(pre-birth) coordinates; all of its constituents existed at the birth
+of $q$, so it belonged to the sum-set then, and it has an empty
+coordinate (any element of $\{0,\dots,n\}\setminus T$, and the deleted
+coordinates besides), so it is a critical value present at birth:
+an element of $C_q$.
+\end{proof}
+
+\subsection*{Frozen primes}
+
+Call a prime $q$ \emph{urgent} at a given step if $q$ is not critical
+and $q$ does not exceed the cardinality of the upcoming sum-set.
+Urgency is permanent, since the sum-set only grows.
+
+\emph{Rule for urgent primes:} every element inserted from that step
+on satisfies $q \mid e_{i,j}$.
+
+Note that $q=2$ is urgent from the very first insertion (the upcoming
+sum-set already has two elements, and $2$ is never a critical value,
+critical values being odd primes), so all the $e_{i,j}$ are
+automatically even and $E_i\subset 2\NN$, as demanded.
+
+\subsection*{The inductive step}
+
+Suppose the construction has run without incident and we are to insert
+$e_{i,j}$, with $C^\ast$ as above.  Let $A$ be the product of all
+currently urgent primes and all current critical primes, and use the
+Chinese Remainder Theorem to find $B$ with $B\equiv 0 \pmod q$ for
+each urgent $q$ and $B\equiv s_q\pmod q$ for each critical $q$ (the
+moduli are distinct primes).  We seek $e_{i,j}$ of the form $Am+B$;
+imposing the congruence rules is then automatic.  Consider the family
+of linear forms
+\[
+\{\,Am+B+c \;:\; c\in C^\ast\,\}.
+\]
+To apply Dickson's conjecture we must check that no prime $q$ divides
+$\prod_{c}(Am+B+c)$ for every $m$.
+
+If $q\nmid A$, then $Am+B$ runs over all residues modulo $q$, so it
+suffices that the $c$'s not exhaust the residue classes modulo $q$.
+But $q\nmid A$ means $q$ is neither urgent nor critical, whence $q$
+exceeds the cardinality of the upcoming sum-set and in particular
+$|C^\ast|<q$.
+
+If $q$ is urgent, then $Am+B+c\equiv c\pmod q$, and each $c\in C^\ast$
+is a prime different from $q$ (the elements of $C^\ast$ are critical
+values and $q$ is not critical), so $q\nmid\prod_c c$.
+
+If $q$ is critical, then $Am+B+c\equiv s_q+c \pmod q$.  By
+Lemma~\ref{lem:confine} each $c\in C^\ast$ satisfies
+$c\equiv c_0+k s_q$ with $c_0\in C_q$ and $0\le k\le n$, so
+$s_q+c\equiv (k+1)s_q+c_0\not\equiv 0\pmod q$ by \eqref{eq:sq}.
+
+Dickson's conjecture therefore supplies infinitely many $m$ making all
+$Am+B+c$ simultaneously prime.  Among these we choose $e_{i,j}:=Am+B$
+so large that
+\begin{itemize}
+\item[(i)] every new sum $e_{i,j}+c$ exceeds every element of the old
+  sum-set and every currently urgent or critical prime; and
+\item[(ii)] every new sum exceeds $(n+1)N+1$, where $N$ is the number
+  of critical values after the insertion.
+\end{itemize}
+Condition (i) guarantees that urgent primes never become critical
+(a prime already tracked can never reappear as a new sum) and that the
+newly created sums are genuinely new.  Condition (ii) is the
+\emph{growing-room} requirement: any prime $q$ born critical at this
+insertion is itself one of the new sums, so $q>(n+1)N\ge(n+1)N_q$,
+which is exactly \eqref{eq:room}; hence $s_q$ exists and the
+bookkeeping can continue.  (Several critical primes may be born at one
+insertion; they are then present in one another's sets $C_q$, as
+Lemma~\ref{lem:confine} requires.)
+
+All new sums $\{e_{i,j}\}+C^\ast$ are prime, so the enlarged sum-set
+again lies within $\PP$, closing the induction.  Since every
+coordinate receives infinitely many insertions, each
+$E_i=\bigcup_j E_{i,j}$ is infinite, and
+$\{p\}+\sum_i E_i=\bigcup S\subset\PP$.  \qed
+
+\section{Remarks}
+
+Both principal results of this paper have been formally verified in
+Lean~4 against the Mathlib library by Aristotle (Harmonic), in
+collaboration with Claude (Anthropic).
+Proposition~\ref{prop:sharp} and its finite-family consequence are
+verified unconditionally.  Theorem~\ref{thm:main} is verified in
+conditional form: Dickson's conjecture is encoded as an explicit
+hypothesis of the formal statement rather than as an axiom, so the
+axiom footprint of the entire development consists only of Mathlib's
+standard foundational principles, and the unconditional results
+cannot silently depend on the conjecture.  The formalization of the
+construction proceeds through a symmetric strengthening: an injective
+sequence of even numbers all of whose anchored sums of at most $n+1$
+distinct terms are prime, in the spirit of the $\mathrm{FS}_{\le
+k}$-statement of \cite{KMRRsurvey}, Appendix~B.
+
+The Bateman--Horn conjecture \cite{BatemanHorn} includes a
+quantitative version of Dickson's conjecture, but asymptotic densities
+without error estimates do not help us bound the $e_{i,j}$.  Lacking
+even conjectural tools to bound growth rates, the construction above
+aims for clarity rather than parsimony.
+
+Granville's conclusion from Dickson's conjecture is dramatic: the
+primes contain $k$-fold sum-sets of infinite sets for every $k$.  One
+might well ask whether so strong a conclusion ought to count as
+evidence \emph{against} the conjecture.  The prospect has a special
+appeal for the skeptic: a contradiction derived from Granville's
+conclusion alone would demolish Dickson's conjecture wholesale,
+without the labor of singling out a particular fatal admissible
+family.  Alas for the skeptic, the probabilistic heuristic supports
+Granville's conclusion.  Dickson's conjecture holds in almost every
+random model that captures the density behavior of the primes, and
+such random sets contain the analogous sum-sets.  But curiously, the
+same heuristic supports a conclusion that is provably false.  A
+typical random set with prime-like densities contains
+\emph{infinite}-dimensional sum-sets: generically one may insert
+infinitely many dimension-increasing steps into the construction,
+the divisibility obstruction underlying
+Proposition~\ref{prop:sharp} having no analogue for a random set.
+For the primes themselves, Proposition~\ref{prop:sharp} caps the
+dimension of a sum-set anchored at $p$, unconditionally, at $p-2$.
+The heuristic thus cannot distinguish the true conclusion from the
+false one; what separates them is arithmetic invisible to density
+models, namely the congruence obstruction of
+Proposition~\ref{prop:sharp}.  The dichotomy of this paper locates
+the exact boundary at which the primes part company with their random
+models --- and, granting Dickson, the cap $p-2$ is attained.
+
+\begin{thebibliography}{9}
+
+\bibitem{BatemanHorn}
+P.~T. Bateman and R.~A. Horn,
+\emph{A heuristic asymptotic formula concerning the distribution of
+prime numbers},
+Math.\ Comp.\ \textbf{16} (1962), 363--367.
+
+\bibitem{Dickson}
+L.~E. Dickson,
+\emph{A new extension of Dirichlet's theorem on prime numbers},
+Messenger of Mathematics \textbf{33} (1904), 155--161.
+
+\bibitem{Granville}
+A.~Granville,
+\emph{A note on sums of primes},
+Canad.\ Math.\ Bull.\ \textbf{33} (1990), no.~4, 452--454.
+
+\bibitem{KMRRsurvey}
+B.~Kra, J.~Moreira, F.~K. Richter and D.~Robertson,
+\emph{Problems on infinite sumset configurations in the integers and
+beyond}, preprint, arXiv:2311.06197.
+
+\bibitem{SchSie}
+A.~Schinzel and W.~Sierpi\'nski,
+\emph{Sur certaines hypoth\`eses concernant les nombres premiers},
+Acta Arith.\ \textbf{4} (1958), 185--208.
+
+\bibitem{TaoZiegler}
+T.~Tao and T.~Ziegler,
+\emph{Infinite partial sumsets in the primes},
+J.\ Anal.\ Math.\ \textbf{151} (2023), 375--389.
+
+\end{thebibliography}
+
+\end{document}
