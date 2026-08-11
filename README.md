@@ -1,5 +1,8 @@
 # Dickson's conjecture and infinite multidimensional sum-sets within the primes
 
+[![Verify](https://github.com/DavidVFeldman/dickson-sumsets/actions/workflows/verify.yml/badge.svg)](https://github.com/DavidVFeldman/dickson-sumsets/actions/workflows/verify.yml)
+[![DOI](https://zenodo.org/badge/1330326639.svg)](https://doi.org/10.5281/zenodo.21880269)
+
 Paper and Lean 4 formalization.
 
 **D. Feldman and R. Impagliazzo.**
