@@ -29,18 +29,16 @@ jobs:
           fi
           echo "No sorryAx dependency."
 
-- name: Fail on any axiom beyond the standard three
+      - name: Fail on any axiom beyond the standard three
         run: |
-          sed -n 's/.*depends on axioms: \[\(.*\)\]/\1/p' axioms.txt \
-            | tr ',' '\n' \
-            | sed 's/^ *//; s/ *$//' \
-            | sort -u > found.txt
-          echo "Axioms found:"; cat found.txt
-          if grep -vE '^(propext|Classical\.choice|Quot\.sound)$' found.txt | grep .; then
+          if grep -oE "'[A-Za-z_.]+'" axioms.txt \
+             | sort -u \
+             | grep -vE "^'(propext|Classical\.choice|Quot\.sound)'$" \
+             | grep .; then
             echo "Unexpected axiom above."
             exit 1
           fi
-          echo "Axiom footprint is exactly the standard three."
+          echo "Axiom footprint is propext, Classical.choice, Quot.sound."
 
       - name: Upload axiom report
         uses: actions/upload-artifact@v4
