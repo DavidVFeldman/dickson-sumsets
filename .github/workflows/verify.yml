@@ -1,0 +1,48 @@
+name: Verify
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Build with Lean and Mathlib
+        uses: leanprover/lean-action@v1
+        with:
+          use-mathlib-cache: true
+
+      - name: Print axiom footprints
+        run: lake env lean axiom_check.lean | tee axioms.txt
+
+      - name: Fail if any result depends on sorryAx
+        run: |
+          if grep -q "sorryAx" axioms.txt; then
+            echo "A result depends on sorryAx: the development is not complete."
+            exit 1
+          fi
+          echo "No sorryAx dependency."
+
+      - name: Fail on any axiom beyond the standard three
+        run: |
+          sed -n 's/.*depends on axioms: \[\(.*\)\]/\1/p' axioms.txt > raw.txt
+          tr ',' '\n' < raw.txt | sed 's/^ *//; s/ *$//' | grep -v '^$' | sort -u > found.txt
+          echo "Axioms found:"
+          cat found.txt
+          if grep -vE '^(propext|Classical\.choice|Quot\.sound)$' found.txt; then
+            echo "Unexpected axiom above."
+            exit 1
+          fi
+          echo "Axiom footprint is exactly the standard three."
+
+      - name: Upload axiom report
+        uses: actions/upload-artifact@v4
+        with:
+          name: axiom-report
+          path: axioms.txt
